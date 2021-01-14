@@ -88,22 +88,22 @@ docker build -f Dockerfile.multi -t app-go:0.2 .
 
 ---
 
-![Image](slides/images/03.04.png)
+![Image](images/03.04.png)
 
 ---
 
 
-![Image](slides/images/03.05.png)
+![Image](images/03.05.png)
 
 ---
 
 
-![Image](slides/images/03.06.png)
+![Image](images/03.06.png)
 
 ---
 
 
-![Image](slides/images/03.07.png)
+![Image](images/03.07.png)
 
 ---
 
