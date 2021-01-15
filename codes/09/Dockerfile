@@ -1,6 +1,8 @@
-FROM php:7.2-apache
-WORKDIR /var/www/html/
-COPY . .
-RUN chmod -R 777 files/
-VOLUME [ "/var/www/html/files" ]
+FROM node:14-alpine3.12
+WORKDIR /home/node
+COPY package*.json ./
+RUN npm install
+COPY . ./
+VOLUME [ "/home/node/uploads" ]
+CMD [ "npm", "start" ]
 EXPOSE 80

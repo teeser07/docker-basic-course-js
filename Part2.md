@@ -29,20 +29,31 @@ title: "Docker basic course (JS Edition) - Part 2"
 ## Lab 9. Create upload script image
 
 ```
-docker build -t app-php:0.1 .
+docker build -t app-upload:0.1 .
 ```
 
 ### Volume mount
 
 ```
-docker run -d -p 80:80 app-php:0.1
+docker run -d -p 3000:3000 app-upload:0.1
 ```
 
 ```
-docker run -P app-php:0.1
+docker run -P app-upload:0.1
 ```
 
 ---
+
+### Bind mount
+
+```
+docker run -d -p 3000:3000 -v $(pwd)/uploads:/home/node/uploads app-upload:0.1
+```
+
+- -v is a volume mounting `HOST DIRECTORY`:`CONTAINER DIRECTORY`.
+
+---
+
 
 ```
 docker volume ls
@@ -51,16 +62,6 @@ docker volume ls
 ```
 docker volume inspect {{volumeId}}
 ```
-
----
-
-### Bind mount
-
-```
-docker run -d -p 80:80 -v $(pwd)/files:/var/www/html/files app-php:0.1
-```
-
-- -v is a volume mounting `HOST DIRECTORY`:`CONTAINER DIRECTORY`.
 
 ---
 
