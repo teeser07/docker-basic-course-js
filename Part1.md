@@ -20,6 +20,7 @@ title: "Docker basic course (JS Edition) - Part 1"
 # Checkpoint
 
 - [ ] Basic docker volume
+- [ ] Docker network
 - [ ] Docker multistage build
 - [ ] Real-world example project
 - [ ] Deploy container to Heroku (Bonus!)

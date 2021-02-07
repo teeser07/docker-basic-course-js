@@ -20,6 +20,7 @@ title: "Docker basic course (JS Edition) - Part 2"
 # Checkpoint
 
 - [ ] Basic docker volume
+- [ ] Docker network
 - [ ] Docker multistage build
 - [ ] Real-world example project
 - [ ] Deploy container to Heroku (Bonus!)
@@ -92,6 +93,175 @@ docker volume rm upload-app
 
 ---
 
+# Checkpoint
+
+- [x] Basic docker volume
+- [ ] Docker network
+- [ ] Docker multistage build
+- [ ] Real-world example project
+- [ ] Deploy container to Heroku (Bonus!)
+
+
+---
+
+# Networking
+
+```
+docker network ls
+```
+
+### Type of network
+
+1. Bridge Network
+2. None Network
+3. Host Network
+4. Overlay Network
+
+---
+
+![Image](https://miro.medium.com/max/2656/1*WKiEgPXO8XXppoqgr7ZVQA.png)
+
+https://morioh.com/p/07e61c20c234
+
+---
+
+### 1. Bridge network
+
+```
+docker run -itd --name network-app-01 alpine
+```
+
+```
+docker run -itd --name network-app-02 alpine
+```
+
+```
+docker network inspect bridge
+```
+
+---
+
+![Image](https://miro.medium.com/max/1182/1*DBNLOEZJN3M-Q0LXOuSnew.png)
+https://medium.com/@somprasongd/docker-networking-59b6637de3df
+
+---
+
+#### Check ip of container
+
+```
+docker exec -it network-app-01 ifconfig
+```
+
+```
+docker exec -it network-app-02 ifconfig
+```
+
+```
+docker exec -it network-app-02 ping {ip}
+```
+
+---
+
+![Image](https://miro.medium.com/max/2080/1*DQ7oHTHIgHOvfTqk58NR-A.png)
+
+https://morioh.com/p/07e61c20c234
+
+---
+#### Linking by container name
+
+```
+docker rm network-app-01 -f
+```
+
+```
+docker rm network-app-02 -f
+```
+
+```
+docker run -itd --name network-app-01 alpine
+```
+
+```
+docker run -itd --name network-app-02 --link network-app-01 alpine
+```
+
+```
+docker exec -it network-app-02 ping network-app-01
+```
+
+---
+
+#### Create own network
+
+```
+docker rm network-app-01 -f
+```
+
+```
+docker rm network-app-02 -f
+```
+
+```
+docker network create --driver bridge app-network
+```
+
+```
+docker network ls
+```
+
+```
+docker run -itd --name network-app-01 --network app-network alpine
+```
+
+```
+docker run -itd --name network-app-02 --network app-network alpine
+```
+
+```
+docker exec -it network-app-02 ping network-app-01
+```
+
+
+---
+
+### 2. None network
+
+```
+docker run -itd --name app-none-network --network none alpine
+```
+
+```
+docker exec -it app-none-network ping 1.1.1.1
+```
+
+```
+docker exec -it network-app-02 ping 1.1.1.1
+```
+
+---
+
+### 3. Host network
+
+```
+docker run -itd --name app-host-network --network host alpine
+```
+
+```
+docker network inspect host
+```
+
+```
+docker exec -it app-host-network ifconfig
+```
+
+---
+
+### 4. Overlay network
+
+![Image](https://miro.medium.com/max/1284/1*rk_5tzWwrSKcHCKwhYMH0Q.png)
+
+---
+
 ## Lab 10. Golang api
 
 ```
@@ -138,6 +308,7 @@ docker build -f Dockerfile.multi -t app-go:0.2 .
 # Checkpoint
 
 - [x] Basic docker volume
+- [x] Docker network
 - [x] Docker multistage build
 - [ ] Real-world example project
 - [ ] Deploy container to Heroku (Bonus!)
@@ -175,6 +346,7 @@ docker run -it -p  3080:3080 --name vue-node-ui vue-node-image:0.1
 # Checkpoint
 
 - [x] Basic docker volume
+- [x] Docker network
 - [x] Docker multistage build
 - [x] Real-world example project
 - [ ] Deploy container to Heroku (Bonus!)
@@ -223,6 +395,7 @@ heroku logs --tail --app warm-dusk-59086
 # Checkpoint
 
 - [x] Basic docker volume
+- [x] Docker network
 - [x] Docker multistage build
 - [x] Real-world example project
 - [x] Deploy container to Heroku (Bonus!)
