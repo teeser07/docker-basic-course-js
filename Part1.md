@@ -188,10 +188,6 @@ docker kill $(docker ps -q)
 
 ---
 
-![Image](images/02.06.png)
-
----
-
 # Dockerfile
 
 ```

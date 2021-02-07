@@ -32,8 +32,6 @@ title: "Docker basic course (JS Edition) - Part 2"
 docker build -t app-upload:0.1 .
 ```
 
-### Volume mount
-
 ```
 docker run -d -p 3000:3000 app-upload:0.1
 ```
@@ -44,7 +42,21 @@ docker run -P app-upload:0.1
 
 ---
 
-### Bind mount
+### Volume mount
+
+![Image](images/02.06.png)
+
+---
+
+### 1. tmpfs mount
+
+![Image](https://docs.docker.com/storage/images/types-of-mounts-tmpfs.png)
+
+---
+
+### 2. Bind mount
+
+![Image](https://docs.docker.com/storage/images/types-of-mounts-bind.png)
 
 ```
 docker run -d -p 3000:3000 -v $(pwd)/uploads:/home/node/uploads app-upload:0.1
@@ -54,6 +66,13 @@ docker run -d -p 3000:3000 -v $(pwd)/uploads:/home/node/uploads app-upload:0.1
 
 ---
 
+### 3. Volume
+
+![Image](https://docs.docker.com/storage/images/types-of-mounts-volume.png)
+
+```
+docker volume create upload-app
+```
 
 ```
 docker volume ls
@@ -61,6 +80,14 @@ docker volume ls
 
 ```
 docker volume inspect {{volumeId}}
+```
+
+```
+docker run -d -p 3000:3000 -v upload-app:/home/node/uploads app-upload:0.1
+```
+
+```
+docker volume rm upload-app
 ```
 
 ---
@@ -192,6 +219,7 @@ heroku open --app warm-dusk-59086
 heroku logs --tail --app warm-dusk-59086
 ```
 
+---
 # Checkpoint
 
 - [x] Basic docker volume
