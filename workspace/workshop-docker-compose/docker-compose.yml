@@ -1,0 +1,31 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    command: ['/bin/sh', '-c', 'npm install --quiet && node ./app.js']
+    volumes:
+      - ./api:/usr/app/
+      - /api/usr/app/node_modules
+    ports:
+      - "3001:3001"
+    networks:
+      - custom-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./frontend:/usr/app/
+      - /frontend/usr/app/node_modules
+    command: ['/bin/sh', '-c', 'yarn --quiet; yarn dev']
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    networks:
+      - custom-network
+networks:
+  custom-network:
+    external: true
