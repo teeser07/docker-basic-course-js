@@ -1,7 +1,4 @@
-FROM node:10.16.0-alpine AS dependencies
-
-ENV TERM=xterm
-ENV TZ=Asia/Bangkok
+FROM node:12.18-alpine
 
 RUN mkdir -p /usr/app
 WORKDIR /usr/app
