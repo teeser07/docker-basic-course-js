@@ -5,4 +5,4 @@ RUN npm install
 COPY . ./
 VOLUME [ "/home/node/uploads" ]
 CMD [ "npm", "start" ]
-EXPOSE 80
+EXPOSE 3000
