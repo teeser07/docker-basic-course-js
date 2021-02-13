@@ -70,7 +70,7 @@ services:
       - ./api:/usr/app/
       - /api/usr/app/node_modules
     ports:
-      - "3001:3001"
+      - "3000:3000"
     networks:
       - custom-network
 networks:
